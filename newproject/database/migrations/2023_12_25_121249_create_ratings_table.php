@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('hotel-id');
-            $table->unsignedBigInteger('coustemer-id');
+            $table->unsignedBigInteger('hotel_id');
+            $table->unsignedBigInteger('coustemer_id');
             $table->unsignedInteger('star');
             $table->string('comment');
-            $table->foreign('hotel-id')->references('id')->on('hotels')->onDelete('cascade');
-            $table->foreign('coustemer-id')->references('id')->on('coustmers')->onDelete('cascade');
+            $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
+            $table->foreign('coustemer_id')->references('id')->on('coustmers')->onDelete('cascade');
         });
     }
 

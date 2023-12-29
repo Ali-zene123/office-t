@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('city-id');
-            $table->unsignedBigInteger('company-id');
-            $table->timestamp('date-start');
-            $table->timestamp('date-end');
-            $table->foreign('city-id')->references('id')->on('cities')->onDelete('cascade');
-            $table->foreign('company-id')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('city_id');
+            $table->unsignedBigInteger('company_id');
+            $table->timestamp('date_start');
+            $table->timestamp('date_end');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             
         });
     }
