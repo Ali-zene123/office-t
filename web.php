@@ -14,11 +14,11 @@ if(!empty($prefix[1])){
     }
     else{ 
         $prefix=$prefix[1];
-        dd($prefix);
+       
     }  
     $controllerName = $prefix . 'Controller';
    
-    Route::prefix($prefix)->group(function () use ($controllerName, $prefix ) {
+    Route::prefix($prefix)->Middleware('auth')->group(function () use ($controllerName, $prefix ) {
 
         $controllerClass = "App\\Http\\Controllers\\{$controllerName}";
 
