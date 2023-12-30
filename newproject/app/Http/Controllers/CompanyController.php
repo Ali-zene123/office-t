@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
 {
@@ -14,7 +15,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Company::all();
+        return view('company.show',['companies' => $companies]);
     }
 
     /**
@@ -24,7 +26,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('company.create');
     }
 
     /**
@@ -35,7 +37,18 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:10|regex:/^(09)[0-9]{8}$/'
+        ]);
+        if ($validator->fails()) {
+            return response($validator->messages());
+        }
+        $company = new Company();
+        $company->name = $request->name;
+        $company->phone = $request->phone;
+        $company->save();
+        return redirect()->route('company');
     }
 
     /**
@@ -44,7 +57,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($id)
     {
         //
     }
@@ -55,9 +68,10 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit($id)
     {
-        //
+        $company = Company::find($id);        
+        return view('company.edit',['company'=>$company]);
     }
 
     /**
@@ -67,9 +81,20 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:10|regex:/^(09)[0-9]{8}$/'
+        ]);
+        if ($validator->fails()) {
+            return response($validator->messages());
+        }
+        $company = Company::find($request->id);
+        $company->name = $request->name;
+        $company->phone = $request->phone;
+        $company->save();
+        return redirect()->route('company');
     }
 
     /**
@@ -78,8 +103,9 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        Company::where('id', $id)->delete();
+        return redirect()->route('company');
     }
 }
