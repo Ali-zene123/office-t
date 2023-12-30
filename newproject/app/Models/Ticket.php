@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Company;
-use App\Models\Customer;
+use App\Models\City;
 
 class Ticket extends Model
 {
@@ -34,7 +34,7 @@ class Ticket extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function customer(){
-        return $this->belongsTo(Customer::class);
+    public function city(){
+        return $this->belongsTo(City::class);
     }
 }
