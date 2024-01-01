@@ -9,7 +9,13 @@ use App\Models\Ticket;
 class City extends Model
 {
     use HasFactory;
-    
+    protected $table = 'cities';
+
+    protected $fillable =[
+        'name',
+        'location',
+    ];
+
     public function tickets() {
         return $this->hasMany(Ticket::class);
     }
