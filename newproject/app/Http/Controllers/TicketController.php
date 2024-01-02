@@ -43,13 +43,14 @@ class TicketController extends Controller
     {
         // dd($request->city_id);
         $validator = Validator::make($request->all(), [
-            'date_start' => 'required',
-            'date_end' => 'required',
+            'date_start' => 'required|before:date_end',
+            'date_end' => 'required|after:date_start',
             'company_id' => 'required|exists:companies,id',
             'city_id' => 'required|exists:cities,id',
         ]);
         if ($validator->fails()) {
-            return response($validator->messages());
+            $errors=$validator->messages()->toArray();
+            return view('error',['errors'=>$errors]);
         }
         $ticket = new Ticket();
         $ticket->date_start = $request->date_start;
@@ -68,7 +69,7 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        
     }
 
     /**
@@ -102,7 +103,8 @@ class TicketController extends Controller
             'city_id' => 'required|exists:cities,id',
         ]);
         if ($validator->fails()) {
-            return response($validator->messages());
+            $errors=$validator->messages()->toArray();
+            return view('error',['errors'=>$errors]);
         }
         $ticket =Ticket::find($request->id);
         $ticket->date_start = $request->date_start;

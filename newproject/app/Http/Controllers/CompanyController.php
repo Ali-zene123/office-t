@@ -42,7 +42,8 @@ class CompanyController extends Controller
             'phone' => 'required|string|max:10|regex:/^(09)[0-9]{8}$/'
         ]);
         if ($validator->fails()) {
-            return response($validator->messages());
+            $errors=$validator->messages()->toArray();
+            return view('error',['errors'=>$errors]);
         }
         $company = new Company();
         $company->name = $request->name;
@@ -88,7 +89,8 @@ class CompanyController extends Controller
             'phone' => 'required|string|max:10|regex:/^(09)[0-9]{8}$/'
         ]);
         if ($validator->fails()) {
-            return response($validator->messages());
+            $errors=$validator->messages()->toArray();
+            return view('error',['errors'=>$errors]);
         }
         $company = Company::find($request->id);
         $company->name = $request->name;
