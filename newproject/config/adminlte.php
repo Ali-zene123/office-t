@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'OFFICE TOURISM',
+    'title' => 'AdminLTE 3',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>OFFICE</b>tourism',
+    'logo' => '<b>Admin</b>LTE',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -167,11 +167,11 @@ return [
     |
     */
 
-    'classes_auth_card' => '',
-    'classes_auth_header' => 'bg-gradient-info',
+    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_header' => '',
     'classes_auth_body' => '',
-    'classes_auth_footer' => 'text-center',
-    'classes_auth_icon' => 'fa-lg text-info',
+    'classes_auth_footer' => '',
+    'classes_auth_icon' => '',
     'classes_auth_btn' => 'btn-flat btn-primary',
 
     /*
@@ -189,13 +189,13 @@ return [
     'classes_body' => '',
     'classes_brand' => '',
     'classes_brand_text' => '',
-    'classes_content_wrapper' => 'bg-gradient-dark',
+    'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => ' ',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-red navbar-light',
-    'classes_topnav_nav' => 'navbar-expand ',
+    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
     /*
@@ -218,7 +218,7 @@ return [
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 600,
+    'sidebar_nav_animation_speed' => 300,
 
     /*
     |--------------------------------------------------------------------------
@@ -330,64 +330,53 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text'    => 'Our-company',
+            'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
-
                 [
-                    'text'    => 'tables',
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text'    => 'level_one',
                     'url'     => '#',
                     'submenu' => [
                         [
-                            'text' => 'coustemers',
+                            'text' => 'level_two',
                             'url'  => '#',
                         ],
                         [
-                            'text'    => 'companies',
+                            'text'    => 'level_two',
                             'url'     => '#',
-
+                            'submenu' => [
+                                [
+                                    'text' => 'level_three',
+                                    'url'  => '#',
+                                ],
+                                [
+                                    'text' => 'level_three',
+                                    'url'  => '#',
+                                ],
+                            ],
                         ],
-                        [
-                            'text'    => 'ratings',
-                            'url'     => '#',
-
-                        ],
-                        [
-                            'text'    => 'employess',
-                            'url'     => '#',
-
-                        ],
-                        [
-                            'text'    => 'booking',
-                            'url'     => '#',
-
-                        ],
-                        [
-                            'text'    => 'cities',
-                            'url'     => '#',
-
-                        ],
-                        [
-                            'text'    => 'hotels',
-                            'url'     => '#',
-
-                        ],
-
                     ],
                 ],
-
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
             ],
         ],
         ['header' => 'labels'],
         [
-            'text'       => 'information',
-            'icon_color' => 'black',
+            'text'       => 'important',
+            'icon_color' => 'red',
             'url'        => '#',
         ],
         [
-            'text'       => 'money',
+            'text'       => 'warning',
             'icon_color' => 'yellow',
-            'url'        => '/home',
+            'url'        => '#',
         ],
         [
             'text'       => 'information',

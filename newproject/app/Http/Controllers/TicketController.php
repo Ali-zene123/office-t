@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\City;
+use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TicketController extends Controller
 {
@@ -25,7 +28,9 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        $cities = City::all();
+        $companies = Company::all();
+        return view('ticket.create',['companies' => $companies, 'cities' => $cities]);
     }
 
     /**
@@ -36,7 +41,24 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->city_id);
+        $validator = Validator::make($request->all(), [
+            'date_start' => 'required|before:date_end',
+            'date_end' => 'required|after:date_start',
+            'company_id' => 'required|exists:companies,id',
+            'city_id' => 'required|exists:cities,id',
+        ]);
+        if ($validator->fails()) {
+            $errors=$validator->messages()->toArray();
+            return view('error',['errors'=>$errors]);
+        }
+        $ticket = new Ticket();
+        $ticket->date_start = $request->date_start;
+        $ticket->date_end = $request->date_end;
+        $ticket->city_id = $request->city_id;
+        $ticket->company_id = $request->company_id;
+        $ticket->save();
+        return redirect()->route('ticket');
     }
 
     /**
@@ -47,7 +69,7 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        
     }
 
     /**
@@ -56,9 +78,12 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ticket $ticket)
+    public function edit($id)
     {
-        //
+        $ticket = Ticket::find($id); 
+        $cities = City::all();
+        $companies = Company::all();       
+        return view('ticket.edit',['ticket'=>$ticket , 'companies'=>$companies , 'cities'=>$cities]);
     }
 
     /**
@@ -68,9 +93,26 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(Request $request)
     {
-        //
+        // dd($request->city_id);
+        $validator = Validator::make($request->all(), [
+            'date_start' => 'required|before:date_end',
+            'date_end' => 'required|after:date_start',
+            'company_id' => 'required|exists:companies,id',
+            'city_id' => 'required|exists:cities,id',
+        ]);
+        if ($validator->fails()) {
+            $errors=$validator->messages()->toArray();
+            return view('error',['errors'=>$errors]);
+        }
+        $ticket =Ticket::find($request->id);
+        $ticket->date_start = $request->date_start;
+        $ticket->date_end = $request->date_end;
+        $ticket->city_id = $request->city_id;
+        $ticket->company_id = $request->company_id;
+        $ticket->save();
+        return redirect()->route('ticket');
     }
 
     /**

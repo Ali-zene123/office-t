@@ -10,10 +10,7 @@ use App\Models\City;
 class Ticket extends Model
 {
     use HasFactory;
-    // city_id
-    // company_id
-    // date_start
-    // date_end
+      
     protected $table = 'tickets';
     
     protected $fillable =[
